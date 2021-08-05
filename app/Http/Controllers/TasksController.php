@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\tasks;
-use App\Http\Controllers\User;
+use App\Models\User;
 use Response;
 class TasksController extends Controller
 {
@@ -20,9 +20,14 @@ class TasksController extends Controller
         $data = new tasks();
         $data->name = $request->name;$data->descrp= $request->descrp;$data->time = $request->time;
         $data->starttask= $request->starttask;$data->endtask = $request->endtask;
-        if (auth()->User()->tasksuser()->save($data))
-            return response()->json(['isAdded' =>'true']);
-            return response()->json(['isAdded' =>'false']);
+        if(Auth::check()){
+            User()->tasksuser()->save($data);
+         return response()->json("Success");
+         }else{
+           return response()->json("failure");
+         }
+      
+      
     }
  
     public function updateData(Request $request, $id)
