@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', 'App\Http\Controllers\AuthController@login');
 Route::post('register', 'App\Http\Controllers\AuthController@register');
 Route::post('/logout', 'App\Http\Controllers\AuthController@logout');
-Route::post('/storeTask', 'App\Http\Controllers\tasksController@store');
+Route::post('/storeTask/{id}', 'App\Http\Controllers\tasksController@store');
 Route::get('/getAllTasks', 'App\Http\Controllers\tasksController@getAllData');
 Route::put('/updateTask/{id}', 'App\Http\Controllers\tasksController@updateData');
 Route::delete('/delete/{id}', 'App\Http\Controllers\tasksController@destroy');

@@ -8,7 +8,7 @@ use App\Models\User;
 use Response;
 class TasksController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
         $this->validate($request, [
             'name' => 'required',
@@ -21,12 +21,13 @@ class TasksController extends Controller
         $data->name = $request->name;$data->descrp= $request->descrp;$data->time = $request->time;
         $data->starttask= $request->starttask;$data->endtask = $request->endtask;
         if(Auth::check()){
-            User()->tasksuser()->save($data);
-         return response()->json("Success");
+            $user = User::find(Auth::user()->id);
+
+            $user->tasksuser()->save($data);
+            return response()->json("Success");
          }else{
            return response()->json("failure");
          }
-      
       
     }
  
