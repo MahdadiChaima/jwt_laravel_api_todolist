@@ -18,16 +18,18 @@ class TasksController extends Controller
             'starttask'=> 'required'
         ]);
         $data = new tasks();
-        $data->name = $request->name;$data->descrp= $request->descrp;$data->time = $request->time;
-        $data->starttask= $request->starttask;$data->endtask = $request->endtask;
+        $data->name = $request->name;
+        $data->descrp= $request->descrp;
+        $data->time = $request->time;
+        $data->starttask= $request->starttask;
+        $data->endtask = $request->endtask;
         if(Auth::check()){
             $user = User::find(Auth::user()->id);
 
             $user->tasksuser()->save($data);
-            return response()->json("Success");
-         }else{
-           return response()->json("failure");
-         }
+            return response()->json(['isAdded' =>'true']);}
+            else{
+                return response()->json(['isAdded' =>'false']);}
       
     }
  
